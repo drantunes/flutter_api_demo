@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_api_demo/pages/usuarios/add_usuario_page.dart';
 import 'package:flutter_api_demo/pages/usuarios/usuarios_controller.dart';
 import 'package:provider/provider.dart';
 
@@ -10,34 +12,71 @@ class UsuariosPage extends StatefulWidget {
 }
 
 class _UsuariosPageState extends State<UsuariosPage> {
+  late UsuariosController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = context.read<UsuariosController>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Usuarios'),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.person_add)),
-        ],
-      ),
-      body: Consumer<UsuariosController>(builder: (context, controller, _) {
-        return ListView.separated(
-          itemCount: controller.usuarios.length,
-          itemBuilder: (context, int index) => ListTile(
-            leading: CircleAvatar(
-              child: Image.network(
-                controller.usuarios[index].avatar ?? controller.avatarDefault,
+          IconButton(
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const AddUsuarioPage(),
+                fullscreenDialog: true,
               ),
             ),
-            title: Text(controller.usuarios[index].name),
-            subtitle: Text(controller.usuarios[index].email),
-            trailing: IconButton(
-              icon: const Icon(Icons.delete),
-              onPressed: () {},
-            ),
+            icon: const Icon(Icons.person_add),
           ),
-          separatorBuilder: (_, __) => const Divider(),
-        );
-      }),
+        ],
+      ),
+      body: ValueListenableBuilder<Status>(
+          valueListenable: controller.status,
+          builder: (context, status, _) {
+            final usuarios = controller.usuarios;
+
+            if (status == Status.loading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            return ListView.separated(
+              itemCount: usuarios.length,
+              itemBuilder: (context, int index) => ListTile(
+                leading: CircleAvatar(
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(50)),
+                    child: Image(
+                      image: CachedNetworkImageProvider(
+                        usuarios[index].avatar ?? controller.avatarDefault,
+                      ),
+                    ),
+                  ),
+                ),
+                title: Text(usuarios[index].name),
+                subtitle: Text(usuarios[index].email),
+                trailing: IconButton(
+                  icon: controller.currentUsuarioIndex == index
+                      ? const SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(strokeWidth: 3),
+                        )
+                      : const Icon(Icons.delete),
+                  onPressed: () => {},
+                ),
+              ),
+              separatorBuilder: (_, __) => const Divider(),
+            );
+          }),
     );
   }
 }

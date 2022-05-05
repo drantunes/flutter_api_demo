@@ -1,18 +1,15 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_api_demo/entities/usuario.dart';
 
-class UsuariosRepository extends ChangeNotifier {
+class UsuariosRepository {
   List<Usuario> usuarios = [];
 
   UsuariosRepository();
 
   Future<List<Usuario>> getAll() async {
-    return [];
+    return usuarios;
   }
 
-  // Future<Usuario> getById(String id) async {}
-
-  Future<void> store(Usuario usuario) async {}
+  Future<void> store(String name, String email) async {}
 
   Future<void> delete(Usuario usuario) async {}
 }
