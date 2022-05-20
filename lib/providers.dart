@@ -7,6 +7,8 @@ final providers = [
     create: (context) => UsuariosRepository(),
   ),
   Provider<UsuariosController>(
-    create: (context) => UsuariosController(usuariosRepository: context.read<UsuariosRepository>()),
+    create: (context) => UsuariosController(
+      usuariosRepository: context.read<UsuariosRepository>(),
+    ),
   ),
 ];

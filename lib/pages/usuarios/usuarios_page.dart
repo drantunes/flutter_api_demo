@@ -27,6 +27,10 @@ class _UsuariosPageState extends State<UsuariosPage> {
         title: const Text('Usuarios'),
         actions: [
           IconButton(
+            icon: const Icon(Icons.refresh),
+            onPressed: () => context.read<UsuariosController>().loadUsuarios(),
+          ),
+          IconButton(
             onPressed: () => Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => const AddUsuarioPage(),
@@ -71,7 +75,7 @@ class _UsuariosPageState extends State<UsuariosPage> {
                           child: CircularProgressIndicator(strokeWidth: 3),
                         )
                       : const Icon(Icons.delete),
-                  onPressed: () => {},
+                  onPressed: () => controller.removeUsuario(index),
                 ),
               ),
               separatorBuilder: (_, __) => const Divider(),

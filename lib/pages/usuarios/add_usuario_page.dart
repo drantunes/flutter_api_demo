@@ -18,6 +18,7 @@ class _AddUsuarioPageState extends State<AddUsuarioPage> {
     final controller = Provider.of<UsuariosController>(context, listen: false);
 
     if (_formKey.currentState!.validate()) {
+      await controller.addUsuario(_name.text, _email.text);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Usuário cadastrado!')),
       );
