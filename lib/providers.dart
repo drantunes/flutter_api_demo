@@ -1,5 +1,5 @@
-import 'package:flutter_api_demo/pages/usuarios/users_controller.dart';
-import 'package:flutter_api_demo/repositories/usuarios_repository.dart';
+import 'package:flutter_api_demo/pages/users/users_controller.dart';
+import 'package:flutter_api_demo/repositories/users_repository.dart';
 import 'package:provider/provider.dart';
 
 final providers = [

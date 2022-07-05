@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_demo/entities/user.dart';
-import 'package:flutter_api_demo/repositories/usuarios_repository.dart';
+import 'package:flutter_api_demo/repositories/users_repository.dart';
 
 enum Status { loading, updating, success, error }
 

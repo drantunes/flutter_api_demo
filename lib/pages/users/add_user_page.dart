@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_demo/pages/usuarios/users_controller.dart';
+import 'package:flutter_api_demo/pages/users/users_controller.dart';
 import 'package:provider/provider.dart';
 
 class AddUserPage extends StatefulWidget {
