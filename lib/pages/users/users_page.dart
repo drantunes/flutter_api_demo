@@ -1,7 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_api_demo/pages/users/add_user_page.dart';
 import 'package:flutter_api_demo/pages/users/users_controller.dart';
+import 'package:flutter_api_demo/services/auth_service.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class UsersPage extends StatefulWidget {
@@ -31,13 +32,12 @@ class _UsersPageState extends State<UsersPage> {
             onPressed: () => context.read<UsersController>().loadUsers(),
           ),
           IconButton(
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const AddUserPage(),
-                fullscreenDialog: true,
-              ),
-            ),
+            onPressed: () => context.push('/users/add'),
             icon: const Icon(Icons.person_add),
+          ),
+          IconButton(
+            onPressed: () => context.read<AuthService>().logout(),
+            icon: const Icon(Icons.logout),
           ),
         ],
       ),
@@ -55,6 +55,7 @@ class _UsersPageState extends State<UsersPage> {
           return ListView.separated(
             itemCount: usuarios.length,
             itemBuilder: (context, int index) => ListTile(
+              onTap: () => context.push('/users/${usuarios[index].id}'),
               leading: CircleAvatar(
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(50)),
