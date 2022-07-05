@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_demo/pages/usuarios/usuarios_controller.dart';
+import 'package:flutter_api_demo/pages/usuarios/users_controller.dart';
 import 'package:provider/provider.dart';
 
-class AddUsuarioPage extends StatefulWidget {
-  const AddUsuarioPage({Key? key}) : super(key: key);
+class AddUserPage extends StatefulWidget {
+  const AddUserPage({Key? key}) : super(key: key);
 
   @override
-  State<AddUsuarioPage> createState() => _AddUsuarioPageState();
+  State<AddUserPage> createState() => _AddUserPageState();
 }
 
-class _AddUsuarioPageState extends State<AddUsuarioPage> {
+class _AddUserPageState extends State<AddUserPage> {
   final _formKey = GlobalKey<FormState>();
   final _name = TextEditingController();
   final _email = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   salvar() async {
-    final controller = Provider.of<UsuariosController>(context, listen: false);
+    final controller = Provider.of<UsersController>(context, listen: false);
 
     if (_formKey.currentState!.validate()) {
-      await controller.addUsuario(_name.text, _email.text);
+      await controller.addUser(_name.text, _email.text);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Usuário cadastrado!')),
       );
@@ -49,6 +54,7 @@ class _AddUsuarioPageState extends State<AddUsuarioPage> {
                   if (value!.isEmpty) {
                     return 'Informe o nome do usuário!';
                   }
+
                   return null;
                 },
               ),
@@ -65,6 +71,7 @@ class _AddUsuarioPageState extends State<AddUsuarioPage> {
                     if (value!.isEmpty) {
                       return 'Informe o email do usuário!';
                     }
+
                     return null;
                   },
                 ),
@@ -79,7 +86,7 @@ class _AddUsuarioPageState extends State<AddUsuarioPage> {
                     child: const Text('Salvar'),
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

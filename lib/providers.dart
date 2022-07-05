@@ -1,14 +1,14 @@
-import 'package:flutter_api_demo/pages/usuarios/usuarios_controller.dart';
+import 'package:flutter_api_demo/pages/usuarios/users_controller.dart';
 import 'package:flutter_api_demo/repositories/usuarios_repository.dart';
 import 'package:provider/provider.dart';
 
 final providers = [
-  Provider<UsuariosRepository>(
-    create: (context) => UsuariosRepository(),
+  Provider<UsersRepository>(
+    create: (context) => UsersRepository(),
   ),
-  Provider<UsuariosController>(
-    create: (context) => UsuariosController(
-      usuariosRepository: context.read<UsuariosRepository>(),
+  Provider<UsersController>(
+    create: (context) => UsersController(
+      usersRepository: context.read<UsersRepository>(),
     ),
   ),
 ];

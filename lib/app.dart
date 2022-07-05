@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_api_demo/pages/usuarios/usuarios_page.dart';
+import 'package:flutter_api_demo/pages/usuarios/users_page.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.amber,
         brightness: Brightness.dark,
       ),
-      home: const UsuariosPage(),
+      home: const UsersPage(),
     );
   }
 }

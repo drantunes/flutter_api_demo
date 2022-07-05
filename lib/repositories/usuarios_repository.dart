@@ -1,27 +1,28 @@
 import 'dart:convert';
 
 import 'package:flutter_api_demo/configs.dart';
-import 'package:flutter_api_demo/entities/usuario.dart';
-import 'package:flutter_api_demo/transformers/usuario_transformer.dart';
+import 'package:flutter_api_demo/entities/user.dart';
+import 'package:flutter_api_demo/transformers/user_transformer.dart';
 import 'package:http/http.dart' as http;
 
-class UsuariosRepository {
-  List<Usuario> usuarios = [];
+class UsersRepository {
+  List<User> users = [];
 
-  UsuariosRepository();
+  UsersRepository();
 
-  Future<List<Usuario>> getAll() async {
+  Future<List<User>> getAll() async {
     final url = Uri.parse('$BASE_API/usuarios');
 
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
-      final usuariosList = jsonDecode(response.body) as List;
-      for (var usuario in usuariosList) {
-        usuarios.add(UsuarioTransformer.fromMap(usuario));
+      final usersList = jsonDecode(response.body) as List;
+      for (var user in usersList) {
+        users.add(UserTransformer.fromMap(user));
       }
     }
-    return usuarios;
+
+    return users;
   }
 
   Future<void> store(String name, String email) async {
@@ -29,16 +30,16 @@ class UsuariosRepository {
     final response = await http.post(url, body: {'name': name, 'email': email});
 
     if (response.statusCode == 201) {
-      final usuario = jsonDecode(response.body) as Map<String, dynamic>;
-      usuarios.add(UsuarioTransformer.fromMap(usuario));
+      final user = jsonDecode(response.body) as Map<String, dynamic>;
+      users.add(UserTransformer.fromMap(user));
     }
   }
 
-  Future<void> delete(Usuario usuario) async {
-    final url = Uri.parse('$BASE_API/usuarios/${usuario.id}');
+  Future<void> delete(User user) async {
+    final url = Uri.parse('$BASE_API/usuarios/${user.id}');
     final response = await http.delete(url);
     if (response.statusCode == 200) {
-      usuarios.remove(usuario);
+      users.remove(user);
     }
   }
 }

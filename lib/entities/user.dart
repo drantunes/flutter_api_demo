@@ -1,10 +1,10 @@
-class Usuario {
+class User {
   String? id;
   String name;
   String email;
   String? avatar;
 
-  Usuario({
+  User({
     this.id,
     required this.name,
     required this.email,
