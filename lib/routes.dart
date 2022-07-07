@@ -4,12 +4,10 @@ import 'package:flutter_api_demo/pages/login/login_page.dart';
 import 'package:flutter_api_demo/pages/users/add_user_page.dart';
 import 'package:flutter_api_demo/pages/users/detail_user_page.dart';
 import 'package:flutter_api_demo/pages/users/users_page.dart';
+import 'package:flutter_api_demo/providers.dart';
 import 'package:flutter_api_demo/repositories/users_repository.dart';
-import 'package:flutter_api_demo/services/auth_service.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-
-final authService = AuthService();
 
 final routes = GoRouter(
   initialLocation: '/users',
