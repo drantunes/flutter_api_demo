@@ -6,14 +6,15 @@ import 'package:flutter_api_demo/pages/users/detail_user_page.dart';
 import 'package:flutter_api_demo/pages/users/users_page.dart';
 import 'package:flutter_api_demo/providers.dart';
 import 'package:flutter_api_demo/repositories/users_repository.dart';
+import 'package:flutter_api_demo/services/auth_service.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 final routes = GoRouter(
   initialLocation: '/users',
-  refreshListenable: authService,
+  refreshListenable: getIt<AuthService>(),
   redirect: (state) {
-    final isAuthenticated = authService.isAuthenticated;
+    final isAuthenticated = getIt<AuthService>().isAuthenticated;
     final isLoginRoute = state.subloc == '/login';
 
     if (!isAuthenticated) {

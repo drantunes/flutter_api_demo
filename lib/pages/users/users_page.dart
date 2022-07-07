@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_api_demo/pages/users/users_controller.dart';
+import 'package:flutter_api_demo/providers.dart';
 import 'package:flutter_api_demo/services/auth_service.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 
 class UsersPage extends StatefulWidget {
   const UsersPage({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _UsersPageState extends State<UsersPage> {
   @override
   void initState() {
     super.initState();
-    controller = context.read<UsersController>();
+    controller = getIt<UsersController>();
   }
 
   @override
@@ -29,14 +30,14 @@ class _UsersPageState extends State<UsersPage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
-            onPressed: () => context.read<UsersController>().loadUsers(),
+            onPressed: () => getIt<UsersController>().loadUsers(),
           ),
           IconButton(
             onPressed: () => context.push('/users/add'),
             icon: const Icon(Icons.person_add),
           ),
           IconButton(
-            onPressed: () => context.read<AuthService>().logout(),
+            onPressed: () => getIt<AuthService>().logout(),
             icon: const Icon(Icons.logout),
           ),
         ],

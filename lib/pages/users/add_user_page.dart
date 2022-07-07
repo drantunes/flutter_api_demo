@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_api_demo/pages/users/users_controller.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_api_demo/providers.dart';
 
 class AddUserPage extends StatefulWidget {
   const AddUserPage({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class _AddUserPageState extends State<AddUserPage> {
   }
 
   salvar() async {
-    final controller = Provider.of<UsersController>(context, listen: false);
+    final controller = getIt<UsersController>();
 
     if (_formKey.currentState!.validate()) {
       await controller.addUser(_name.text, _email.text);
