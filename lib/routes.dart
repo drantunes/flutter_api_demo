@@ -8,7 +8,6 @@ import 'package:flutter_api_demo/providers.dart';
 import 'package:flutter_api_demo/repositories/users_repository.dart';
 import 'package:flutter_api_demo/services/auth_service.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
 final routes = GoRouter(
   initialLocation: '/users',
@@ -49,7 +48,7 @@ final routes = GoRouter(
     GoRoute(
       path: '/users/:userId',
       builder: (context, state) {
-        final user = context.read<UsersRepository>().users.firstWhere(
+        final user = getIt<UsersRepository>().users.firstWhere(
               (user) => user.id == state.params['userId']!,
             );
 
